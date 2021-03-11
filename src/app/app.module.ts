@@ -16,6 +16,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AdminContentComponent } from './admin-content/admin-content.component';
 import { UserContentComponent } from './user-content/user-content.component';
 import { LogoutComponent } from './logout/logout.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LogoutComponent } from './logout/logout.component';
     AccessDeniedComponent,
     AdminContentComponent,
     UserContentComponent,
-    LogoutComponent
+    LogoutComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

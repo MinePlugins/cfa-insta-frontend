@@ -1,0 +1,10 @@
+<h4>Nom : {{product.name}}</h4>
+<h5>Description : {{product.comments}}</h5>
+<div class="product-price">
+Prix/Quantité : 
+    <div *ngIf="product.sale">{{product.price-product.discount}}€/{{product.unit}}</div>
+    <div *ngIf="product.sale"><div class="product-promo">{{product.price}}€/{{product.unit}}</div></div>
+    <div *ngIf="!product.sale"> {{product.price}}€/{{product.unit}}</div>
+  <div class="product-promo-badge" *ngIf="product.sale"><ion-badge color="danger">Promo</ion-badge>
+  </div>
+</div>

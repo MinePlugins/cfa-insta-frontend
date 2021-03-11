@@ -4,6 +4,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AdminContentComponent } from './admin-content/admin-content.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { AdminGuard } from './services/admin.guard';
 import { AuthGuard } from './services/auth.guard';
 import { UserContentComponent } from './user-content/user-content.component';
@@ -14,6 +15,10 @@ const routes: Routes = [ {
   canActivate: [AuthGuard],
   canActivateChild: [AuthGuard],
   children: [
+    {
+      path: 'product-detail/:id',
+      component: ProductDetailComponent
+    },
     {
       path: 'user-content',
       component: UserContentComponent
