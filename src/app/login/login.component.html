@@ -1,22 +1,36 @@
-<h1>Login:</h1>
+<section class="hero is-primary is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="box">
+            <div class="field">
+              <label for="" class="label">Username</label>
+              <div class="control has-icons-left">
+                <input type="text" placeholder="e.g. john" formControlName="username" class="input" required>
+                <span class="icon is-small is-left">
+                  <fa-icon [icon]="faUser"></fa-icon>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="" class="label">Password</label>
+              <div class="control has-icons-left">
+                <input type="password"  formControlName="password" placeholder="*******" class="input" required>
+                <span class="icon is-small is-left">
+                  <fa-icon [icon]="faLock"></fa-icon>
 
-<p style="color:red">{{ message }}</p>
-
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-  <div>
-    <label>
-      Username:
-      <input type="text" formControlName="username">
-    </label>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <button type="submit" [disabled]="!loginForm.valid" class="button is-success">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <label>
-      Password:
-      <input type="password" formControlName="password">
-    </label>
-  </div>
-
-  <button type="submit" [disabled]="!loginForm.valid">Login</button>
-</form>
+</section>

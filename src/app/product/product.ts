@@ -1,8 +1,11 @@
+import { Category } from "../category/category";
+
 export class Product {
     public static fromJson(json: Object): Product {
         return new Product(
             json['id'],
             json['name'],
+            json['category_id'],
             json['category'],
             json['price'],
             json['unit'],
@@ -18,7 +21,8 @@ export class Product {
 
     constructor(public id: number,
                 public name: string,
-                public category: number,
+                public category_id: number,
+                public category: Category,
                 public price: number,
                 public unit: string,
                 public availability: boolean,

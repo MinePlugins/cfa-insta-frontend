@@ -1,10 +1,21 @@
-<h4>Nom : {{product.name}}</h4>
-<h5>Description : {{product.comments}}</h5>
-<div class="product-price">
-Prix/Quantité : 
-    <div *ngIf="product.sale">{{product.price-product.discount}}€/{{product.unit}}</div>
-    <div *ngIf="product.sale"><div class="product-promo">{{product.price}}€/{{product.unit}}</div></div>
-    <div *ngIf="!product.sale"> {{product.price}}€/{{product.unit}}</div>
-  <div class="product-promo-badge" *ngIf="product.sale"><ion-badge color="danger">Promo</ion-badge>
+
+<div class="card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4">{{product.name}}</p>  
+          <div class="tags">
+            <span *ngIf="product.availability" class="tag is-light {{product.availability ? 'is-success':'is-warning'}}">{{product.availability ? "En stock":"Rupture" }}</span> 
+            <span *ngIf="product.sale" class="tag is-warning">Promo !</span>
+          </div>
+        <p class="subtitle is-6">Catégory: {{product.category.name}}</p>
+      </div>
+    </div>
+
+    <div class="content">
+      {{product.comments || "Pas de description"}}
+      <hr>
+      {{product.sale ? product.discount:product.price}}€/{{product.unit}} <span style="text-decoration: line-through;" *ngIf="product.sale">{{product.price}}€/{{product.unit}}</span>
+    </div>
   </div>
 </div>

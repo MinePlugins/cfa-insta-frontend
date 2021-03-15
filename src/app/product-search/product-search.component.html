@@ -1,0 +1,9 @@
+<div class="control  has-icons-right">
+    <input (change)="onSearch()"  [(ngModel)]="search"  id="input" placeholder="Moule"  class="input" type="text" />
+    <span class="icon is-small is-right">
+        <fa-icon [icon]="faSearch"></fa-icon>
+    </span>
+</div>
+<div *ngIf="products?.length > 0">
+    <ngx-datatable [rows]="products" [columns]="columns"> </ngx-datatable>
+</div>

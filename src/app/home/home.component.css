@@ -1,0 +1,22 @@
+.menu {
+    position: sticky;
+    display: inline-block;
+    vertical-align: top;
+    max-height: 100vh;
+    height: 100vh;
+    background-color: hsl(0, 0%, 96%);
+    overflow-y: auto;
+    width: 260px;
+    top: 0;
+    bottom: 0;
+    padding: 30px;
+    
+  }
+.menu-list a:hover {
+    background-color: hsl(0, 0%, 68%);
+} 
+  .content {
+    padding-top: 2em;
+    padding-left: 2em;
+    display: inline-block;
+  }

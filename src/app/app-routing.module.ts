@@ -5,6 +5,8 @@ import { AdminContentComponent } from './admin-content/admin-content.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductSearchComponent } from './product-search/product-search.component';
+import { ProductsComponent } from './products/products.component';
 import { AdminGuard } from './services/admin.guard';
 import { AuthGuard } from './services/auth.guard';
 import { UserContentComponent } from './user-content/user-content.component';
@@ -18,6 +20,14 @@ const routes: Routes = [ {
     {
       path: 'product-detail/:id',
       component: ProductDetailComponent
+    },
+    {
+      path: 'product-search/:search',
+      component: ProductSearchComponent
+    },
+    {
+      path: 'products',
+      component: ProductsComponent
     },
     {
       path: 'user-content',

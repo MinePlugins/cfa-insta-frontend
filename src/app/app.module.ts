@@ -5,10 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
-import {MatToolbarModule} from '@angular/material/toolbar';  
-import {MatIconModule} from '@angular/material/icon';  
-import {MatSidenavModule} from '@angular/material/sidenav';
 import { LoginComponent } from './login/login.component'; 
 import { AuthInterceptor } from './services/auth.interceptor';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +13,12 @@ import { AdminContentComponent } from './admin-content/admin-content.component';
 import { UserContentComponent } from './user-content/user-content.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToastrModule } from 'ngx-toastr';
+import { ProductSearchComponent } from './product-search/product-search.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ProductsComponent } from './products/products.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -25,20 +27,23 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     HomeComponent,
     AccessDeniedComponent,
     AdminContentComponent,
+    ProductSearchComponent,
     UserContentComponent,
     LogoutComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProductSearchComponent,
+    ProductsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatSliderModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatToolbarModule,
+    NgxDatatableModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
+    FontAwesomeModule,
     BrowserAnimationsModule
   ],
   providers: [

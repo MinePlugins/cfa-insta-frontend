@@ -1,0 +1,84 @@
+<div class="container-all" *ngIf="products?.length > 0">
+    <h3>Liste des produits</h3>
+    <ngx-datatable         
+    [headerHeight]="50"
+    [footerHeight]="50"
+    rowHeight="auto"
+    class="bootstrap"
+    [columnMode]="ColumnMode.flex"
+    [rows]="products"
+    [columns]="columns"> 
+    <ngx-datatable-column prop="name" name="Nom" [flexGrow]="3">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          <a routerLink='/product-detail/{{row.id}}'>{{ value }}</a> 
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="sale" name="En Promo" [flexGrow]="1">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+                <span
+                  title="Double click to edit"
+                  (dblclick)="editing[rowIndex + '-sale'] = true"
+                  *ngIf="!editing[rowIndex + '-sale']"
+                >
+                    <span style="color: {{value ? 'green':'black'}} ">{{ value ?'Oui':"Non" }}</span>
+                </span>
+                <select
+                  *ngIf="editing[rowIndex + '-sale']"
+                  (blur)="editing[rowIndex + '-sale'] = false"
+                  (change)="updateValue($event, 'sale', rowIndex)"
+                  [value]="value"
+                >
+                  <option value="true">Oui</option>
+                  <option value="false">Non</option>
+                </select>
+              </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="unit" name="Unité" [flexGrow]="1">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{ value }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="price" name="Prix" [flexGrow]="1">
+        <ng-template let-rowIndex="rowIndex" let-value="value" let-row="row" ngx-datatable-cell-template>
+            <span
+            title="Double click to edit"
+            (dblclick)="editing[rowIndex + '-price'] = true"
+            *ngIf="!editing[rowIndex + '-price']"
+          >
+            {{ value }}€
+          </span>
+          <input
+            autofocus
+            (blur)="updateValue($event, 'price', rowIndex)"
+            *ngIf="editing[rowIndex + '-price']"
+            type="text"
+            [value]="value"
+          />
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="owner" name="Gérant" [flexGrow]="1">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{ value }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="category" name="Catégory" [flexGrow]="1">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+            <span
+              title="Double click to edit"
+              (dblclick)="editing[rowIndex + '-category'] = true"
+              *ngIf="!editing[rowIndex + '-category']"
+            >
+              {{ value.name }}
+            </span>
+            <select
+              *ngIf="editing[rowIndex + '-category']"
+              (blur)="editing[rowIndex + '-category'] = false"
+              (change)="updateValue($event, 'category', rowIndex)"
+              [value]="value.id"
+            >
+              <option *ngFor="let category of categories"  value="{{category.id}}">{{category.name}}</option>
+            </select>
+          </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+</div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  faLock = faLock
+  faUser = faUser
   message = '';
   loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -17,7 +20,8 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private auth: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -31,6 +35,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
       (error) => {
+        this.toastr.error(error, 'Login');
         this.message = error;
       }
     );
