@@ -8,7 +8,7 @@
     [columnMode]="ColumnMode.flex"
     [rows]="products"
     [columns]="columns"> 
-    <ngx-datatable-column prop="name" name="Nom" [flexGrow]="3">
+    <ngx-datatable-column prop="name" name="Nom" [flexGrow]="2">
         <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
           <a routerLink='/product-detail/{{row.id}}'>{{ value }}</a> 
         </ng-template>
@@ -56,27 +56,106 @@
           />
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column prop="owner" name="Gérant" [flexGrow]="1">
+      <ngx-datatable-column prop="sale" name="Promo" [flexGrow]="1">
+        <ng-template let-rowIndex="rowIndex" let-value="value" let-row="row" ngx-datatable-cell-template>
+          <span
+          title="Double click to edit"
+          (dblclick)="editing[rowIndex + '-promo'] = true"
+          *ngIf="!editing[rowIndex + '-promo']"
+        >
+           {{ value ? (((row.price-row.discount)/row.price)*100 | number:'1.00')+"% ("+row.discount+"€)":"Non" }}
+
+        </span>
+        <input
+          autofocus
+          (blur)="updateValue($event, 'promo', rowIndex)"
+          *ngIf="editing[rowIndex + '-promo']"
+          type="text"
+          [value]="((row.price-row.discount)/row.price)*100 | number:'1.00' "
+        />
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="stock" name="Stock" [flexGrow]="1">
+        <ng-template let-rowIndex="rowIndex" let-value="value" let-row="row" ngx-datatable-cell-template>
+        <span
+          title="Double click to edit"
+          (dblclick)="editing[rowIndex + '-stock'] = true"
+          *ngIf="!editing[rowIndex + '-stock']"
+        >
+          {{ value ? value:"Pas de stock"  }}
+        </span>
+        <input
+          autofocus
+          (blur)="updateValue($event, 'stock', rowIndex)"
+          *ngIf="editing[rowIndex + '-stock']"
+          type="text"
+          [value]="value"
+        />
+        <!-- <div class="modal {{editing[rowIndex + '-stock'] ? 'is-active':null}}">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">{{row.name}}</p>
+              <button class="delete" (click)="editing[rowIndex + '-stock'] = false" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <div class="field has-addons has-addons">
+                <p class="control">
+                  <input class="input" (change)="onStock(rowIndex)"  [(ngModel)]=""  type="number" placeholder="Stock">
+                </p>
+                <p class="control">
+                  <span class="select">
+                    <select (change)="onInout()" [(ngModel)]="type[rowIndex + '-stock']">
+                      <option value="in">In ⬇️</option>
+                      <option value="out" selected>Out ⬆️</option>
+                      <option value="loss">Loss 🗑️</option>
+                    </select>
+                  </span>
+                </p>
+                <p *ngIf="show" class="control has-icons-right">
+                  <input class="input"  [(ngModel)]="price[rowIndex + '-stock']"  type="number" placeholder="Prix">
+                  <span class="icon is-small is-right">
+                    <fa-icon [icon]="faEuroSign"></fa-icon>
+                  </span>
+                </p>
+              </div>
+            </section>
+            <footer class="modal-card-foot">
+              <button (click)="onValidateStock()" class="button is-primary">Mise à jour</button>
+              <button class="button" (click)="editing[rowIndex + '-stock'] = false">Cancel</button>
+            </footer>
+          </div>
+        </div> -->
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="quantity_sales" name="Produits Vendu" [flexGrow]="1">
         <ng-template let-value="value" ngx-datatable-cell-template>
           {{ value }}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column prop="category" name="Catégory" [flexGrow]="1">
+      <ngx-datatable-column prop="comments" name="Description" [flexGrow]="2">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{ value }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="category.name" name="Catégory" [flexGrow]="1">
         <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
             <span
               title="Double click to edit"
               (dblclick)="editing[rowIndex + '-category'] = true"
               *ngIf="!editing[rowIndex + '-category']"
             >
-              {{ value.name }}
+              {{ row.category.name }}
             </span>
             <select
               *ngIf="editing[rowIndex + '-category']"
               (blur)="editing[rowIndex + '-category'] = false"
               (change)="updateValue($event, 'category', rowIndex)"
-              [value]="value.id"
+              ([value])='row.category.id'
             >
+              <option selected disabled>--Choisie--</option>
               <option *ngFor="let category of categories"  value="{{category.id}}">{{category.name}}</option>
+
             </select>
           </ng-template>
       </ngx-datatable-column>

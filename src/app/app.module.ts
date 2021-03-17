@@ -19,6 +19,7 @@ import { ProductSearchComponent } from './product-search/product-search.componen
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ProductsComponent } from './products/products.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     NgxDatatableModule,
+    ChartsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,

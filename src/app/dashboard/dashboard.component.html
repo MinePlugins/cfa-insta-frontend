@@ -1,1 +1,118 @@
-<p>dashboard works!</p>
+<section id="myDiv" class="container-all" style="display: block ruby;">
+<div class="is-pulled-right">
+    <div class="field has-addons has-addons-right">
+        <p class="control">
+            <span class="select">
+            <select (change)="onChangeCategory()" [(ngModel)]="selectedCategory">
+                <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                <option selected value="all">Tous</option>
+              </select>
+            </span>
+        </p>
+        <p class="control">
+          <input class="input" (change)="onChangeTime()" type="text" [(ngModel)]="timefilter" placeholder="Durée">
+        </p>
+      </div>
+  </div>
+  
+</section>
+<br>
+<hr>
+<section class="container-all info-tiles">
+    <div class="tile is-ancestor has-text-centered">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">{{ca}}€</p>
+                <p class="subtitle">Chiffre Affaire</p>
+            </article>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">{{products?.length}}</p>
+                <p class="subtitle">Produits</p>
+            </article>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">{{categories?.length}}</p>
+                <p class="subtitle">Catégories</p>
+            </article>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">{{benef}}€</p>
+                <p class="subtitle">Bénéfice</p>
+            </article>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">{{impot}}€</p>
+                <p class="subtitle">Impôt (30%)</p>
+            </article>
+        </div>
+    </div>
+</section>
+<br>
+<section class="container-all">
+    <div class="columns">
+        <div class="column">
+            <div class="card">
+                <div class="card-content">
+                <div class="content">
+                    <canvas *ngIf="barChartLabels" baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+                    </canvas>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <div class="card-content">
+                <div class="content">
+                    <canvas *ngIf="barChartLabels" baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [colors]="lineChartColors"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    chartType='line'>
+                    </canvas>
+                </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <div class="columns">
+        <div class="column">
+            <div class="card">
+                <div class="card-content">
+                <div class="content">
+                    <canvas *ngIf="barChartLabels" baseChart
+                    [datasets]="subChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+                    </canvas>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<!-- <div style="display: block">
+
+<canvas *ngIf="barChartLabels" baseChart
+[datasets]="barChartData"
+[labels]="barChartLabels"
+[options]="barChartOptions"
+[legend]="barChartLegend"
+[chartType]="barChartType">
+</canvas>
+</div> -->
+</section>  

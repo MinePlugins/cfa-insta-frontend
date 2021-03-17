@@ -5,7 +5,7 @@
       <div class="media-content">
         <p class="title is-4">{{product.name}}</p>  
           <div class="tags">
-            <span *ngIf="product.availability" class="tag is-light {{product.availability ? 'is-success':'is-warning'}}">{{product.availability ? "En stock":"Rupture" }}</span> 
+            <span class="tag is-light {{product.availability ? 'is-success':'is-warning'}}">{{product.availability ? "En stock":"Rupture" }}</span> 
             <span *ngIf="product.sale" class="tag is-warning">Promo !</span>
           </div>
         <p class="subtitle is-6">Catégory: {{product.category.name}}</p>
@@ -16,6 +16,59 @@
       {{product.comments || "Pas de description"}}
       <hr>
       {{product.sale ? product.discount:product.price}}€/{{product.unit}} <span style="text-decoration: line-through;" *ngIf="product.sale">{{product.price}}€/{{product.unit}}</span>
+    </div>
+  </div>
+</div>
+<br>
+<div *ngIf="isAdmin" class="card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4">Gestion produit</p>  
+      </div>
+    </div>
+    <div class="content">
+             
+      <p class="subtitle is-6">Stock: <span class="tag is-light {{product.availability ? 'is-success':'is-danger'}}">{{product.stock}} - {{product.availability ? "En stock":"Rupture" }}</span> </p>
+      <div class="field has-addons has-addons">
+        <p class="control">
+          <input class="input" (change)="onStock()"  [(ngModel)]="stock"  type="number" placeholder="Stock">
+        </p>
+        <p class="control">
+          <span class="select">
+            <select (change)="onInout()" [(ngModel)]="type">
+              <option value="in">In ⬇️</option>
+              <option value="out" selected>Out ⬆️</option>
+              <option value="loss">Loss 🗑️</option>
+            </select>
+          </span>
+        </p>
+        <p *ngIf="show" class="control has-icons-right">
+          <input class="input"  [(ngModel)]="price"  type="number" placeholder="Prix">
+          <span class="icon is-small is-right">
+            <fa-icon [icon]="faEuroSign"></fa-icon>
+          </span>
+        </p>
+        <p class="control">
+          <a (click)="onValidateStock()" class="button is-primary">
+            Mise à jour
+          </a>
+        </p>
+      </div>
+      <p class="subtitle is-6">Promotion: <span class="tag is-light {{product.sale ? 'is-success':'is-danger'}}">{{product.sale ? ((product.price-product.discount) | number:'1.00') + '€ de réduction (' +(((product.price-product.discount)/product.price)*100 | number:'1.0-0') + '%)':'Pas de Promo'}}</span> </p>
+      <div class="field has-addons has-addons ">
+        <p class="control has-icons-right">
+          <input class="input" (change)="onSale()"  [(ngModel)]="sale"  type="number" placeholder="Promo">
+          <span class="icon is-small is-right">
+            <fa-icon [icon]="faPercent"></fa-icon>
+          </span>
+        </p>
+        <p class="control">
+          <a (click)="onValidateSale()" class="button is-primary">
+            Mise à jour
+          </a>
+        </p>
+      </div>
     </div>
   </div>
 </div>

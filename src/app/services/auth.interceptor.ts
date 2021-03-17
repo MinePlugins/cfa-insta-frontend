@@ -21,7 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
           return next.handle(reqAuth);
         }),
         catchError((err) => {
-          if(err.status === 404 || err.status === 400){
+          if(err.status === 404 || err.status === 400 || err.status === 500 || err.status === 406){
             return throwError(err);
           }
           else if(err.status === 403){

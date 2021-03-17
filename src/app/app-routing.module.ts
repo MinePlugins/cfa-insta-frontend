@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AdminContentComponent } from './admin-content/admin-content.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
@@ -36,6 +37,16 @@ const routes: Routes = [ {
     {
       path: 'admin-content',
       component: AdminContentComponent,
+      canActivate: [AdminGuard]
+    },
+    {
+      path: 'dashboard',
+      component: DashboardComponent,
+      canActivate: [AdminGuard]
+    },
+    {
+      path: '',
+      component: DashboardComponent,
       canActivate: [AdminGuard]
     },
     {
