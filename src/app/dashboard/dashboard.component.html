@@ -12,6 +12,18 @@
         <p class="control">
           <input class="input" (change)="onChangeTime()" type="text" [(ngModel)]="timefilter" placeholder="Durée">
         </p>
+        <p class="control">
+            <span class="select">
+            <select (change)="onChangeSelectGroupBy()" [(ngModel)]="selectedGroupBy">
+                <option selected value="s">Secondes</option>
+                <option selected value="l">Minutes</option>
+                <option selected value="h">Heures</option>
+                <option selected value="d">Jour</option>
+                <option selected value="m">Mois</option>
+                <option selected value="y">Année</option>
+              </select>
+            </span>
+        </p>
       </div>
   </div>
   

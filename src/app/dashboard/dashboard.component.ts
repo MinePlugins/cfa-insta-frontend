@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
   benef;
   impot;
   selectedCategory = "all";
+  selectedGroupBy = "d"
+  selectedGroupByInt = 10
   @ViewChild('myDiv') myDiv: ElementRef;
   products: Product[];
   categories: Category[];
@@ -73,9 +75,33 @@ export class DashboardComponent implements OnInit {
     }
     return c/b;
   }
-  
+  onChangeSelectGroupBy(): void {
+    switch (this.selectedGroupBy) {
+      case 's':
+        this.selectedGroupByInt = 18
+        break;
+      case 'l':
+        this.selectedGroupByInt = 16
+        break;
+      case 'h':
+        this.selectedGroupByInt = 13
+        break;
+      case 'd':
+        this.selectedGroupByInt = 10
+        break;
+      case 'm':
+        this.selectedGroupByInt = 8
+        break;
+      default:
+        this.selectedGroupByInt = 6
+        break;
+
+    }
+    this.loadData()
+
+  }
   groupBy(): void {
-    this.grouping = _.groupBy(this.history, element => element.datetime.substring(0, 20))
+    this.grouping = _.groupBy(this.history, element => element.datetime.substring(0, this.selectedGroupByInt))
     this.sections = _.map(this.grouping, (items, date) => ({
       datetime: date,
       value: items
