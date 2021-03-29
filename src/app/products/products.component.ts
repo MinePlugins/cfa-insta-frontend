@@ -41,10 +41,15 @@ export class ProductsComponent implements OnInit {
         }
       }
     );
+    setInterval(() => { this.loadData }, 3000);
     this.productsAPI.getProducts().subscribe(
       products => this.products = products);
     this.categoriesAPI.getCategories().subscribe(
       categories => this.categories = categories);
+  }
+  loadData() {
+    this.productsAPI.getProducts().subscribe(
+      products => this.products = products)
   }
   updateValue(event, cell, rowIndex) {
     if(cell === "promo"){
